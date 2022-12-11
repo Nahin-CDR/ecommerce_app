@@ -6,6 +6,7 @@ import 'package:nahins_project/screens/product_details.dart';
 
 
 Widget productCard({
+  required dynamic productID,
   required String title,
   required dynamic productPrice,
   required String productImage ,
@@ -19,6 +20,7 @@ Widget productCard({
   onTap: (){
     Navigator.push(conteXt, MaterialPageRoute(builder: (conteXt)=>
         ProductDetails(
+            productID: productID,
             title: title,
             productPrice: productPrice,
             productImage: productImage,

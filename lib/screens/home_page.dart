@@ -196,6 +196,7 @@ class _HomePageState extends State<HomePage> {
                   listResponse.length,(index) {
                     return Center(
                         child: productCard(
+                            productID: listResponse[index]['id'],
                             title: listResponse[index]['title'],
                             description: listResponse[index]['description'],
                             productImage: listResponse[index]['image'],
