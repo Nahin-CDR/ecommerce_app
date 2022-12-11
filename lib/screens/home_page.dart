@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:nahins_project/custom_widget/exceptions/loading.dart';
 import 'package:nahins_project/custom_widget/exceptions/snackbar_error.dart';
-import 'package:nahins_project/custom_widget/home_page/category_container.dart';
-
 import '../custom_widget/home_page/product_container.dart';
 import 'package:http/http.dart' as http;
 
@@ -188,6 +186,7 @@ class _HomePageState extends State<HomePage> {
                     fontWeight: FontWeight.w400,
                     color: Colors.black)),
           ),
+          /// products
           Expanded(
             child: isLoadingProducts ? showLoading() :
             GridView.count(

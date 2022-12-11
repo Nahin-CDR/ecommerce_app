@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nahins_project/custom_widget/exceptions/loading.dart';
 import 'package:nahins_project/custom_widget/exceptions/snackbar_error.dart';
 import 'package:http/http.dart' as http;
+import 'package:nahins_project/custom_widget/home_page/product_details/section.dart';
 
 class ProductDetails extends StatefulWidget {
   final dynamic productID;
@@ -105,7 +106,6 @@ class _ProductDetailsState extends State<ProductDetails> {
       isLoading = false;
     });
   }
-
   @override
   void initState() {
     setState(() {
@@ -117,10 +117,6 @@ class _ProductDetailsState extends State<ProductDetails> {
   }
   @override
   Widget build(BuildContext context) {
-
-
-
-
      return Scaffold(
       appBar:  AppBar(
         leading: const BackButton(
@@ -161,109 +157,21 @@ class _ProductDetailsState extends State<ProductDetails> {
             height: 200,
             width: MediaQuery.of(context).size.width,
           ),
-          SizedBox(
-            height: 30,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                    margin:const EdgeInsets.only(left: 10),
-                    child:const Text("Product ID : ",
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
-                      ),
-                    )
-                ),
-                Container(
-                    margin:const EdgeInsets.only(right: 70),
-                    child:Text("$productID",
-                      style:const TextStyle(
-                        color: Colors.deepOrange,
-                        fontSize: 12,
-                      ),
-                    )
-                ),
-              ],
-            ),
+          sectionBy(
+              sectionName:"Product ID : " ,
+              value: productID
           ),
-          SizedBox(
-            height: 20,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                    margin:const EdgeInsets.only(left: 10),
-                    child:const Text("Rating : ",
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
-                      ),
-                    )
-                ),
-                Container(
-                    margin:const EdgeInsets.only(right: 70),
-                    child:Text("$rating",
-                      style:const TextStyle(
-                        color: Colors.deepOrange,
-                        fontSize: 12,
-                      ),
-                    )
-                ),
-              ],
-            ),
+          sectionBy(
+              sectionName:"Rating : ",
+              value: rating
           ),
-          SizedBox(
-            height: 25,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                    margin:const EdgeInsets.only(left: 10),
-                    child:const Text("Rating count : ",
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
-                      ),
-                    )
-                ),
-                Container(
-                    margin:const EdgeInsets.only(right: 70),
-                    child:Text("$ratingCount",
-                      style:const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
-                      ),
-                    )
-                ),
-              ],
-            ),
+          sectionBy(
+              sectionName:"Rating count : ",
+              value: ratingCount
           ),
-          SizedBox(
-            height: 20,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                    margin:const EdgeInsets.only(left: 10),
-                    child:const Text("price : ",
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
-                      ),
-                    )
-                ),
-                Container(
-                    margin:const EdgeInsets.only(right: 70),
-                    child:Text("$productPrice usd",
-                      style:const TextStyle(
-                        color: Colors.deepOrange,
-                        fontSize: 15,
-                      ),
-                    )
-                ),
-              ],
-            ),
+          sectionBy(
+              sectionName:"price : ",
+              value: "$productPrice usd"
           ),
           /// adding product quantity
           SizedBox(
