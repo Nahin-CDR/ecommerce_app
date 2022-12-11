@@ -99,120 +99,118 @@ class _HomePageState extends State<HomePage> {
     double unitHeightValue = MediaQuery.of(context).size.height * 0.01;
     double multiplier = 2.0;
     width = MediaQuery.of(context).size.width / 2;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          /// Section Name
-          Container(
-            margin: const EdgeInsets.only(
-              top: 15, left: 10,),
-            child:const Text("Categories",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black)),
-          ),
-          /// Categories Section
-          SizedBox(
-            height: 70,
-            child: isLoadingCategory ? showLoading() : ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: uniqueCategory.length,
-              itemBuilder: (context,index){
-                return Container(
-                  height: 30,
-                  constraints: const BoxConstraints(
-                    minWidth: 120,
-                  ),
-                  //width : 150,
-                  padding:const EdgeInsets.all(2),
-                  margin : const EdgeInsets.all(10),
-                  child: Container(
-                    height : 60,
-                    decoration:  BoxDecoration(
-                        color: Colors.white,
-                        borderRadius:const BorderRadius.all(
-                          Radius.circular(30.0),
-                        ),
-                        boxShadow: [
-                          isChecked[index] == true? const BoxShadow(
-                              color: Colors.deepOrange,
-                              offset: Offset(1.0, 2.0),
-                              blurRadius: 8.0,
-                              spreadRadius: 2.0
-                          ):
-                          const BoxShadow(
-                              color: Colors.grey,
-                              offset: Offset(1.0, 2.0),
-                              blurRadius: 8.0,
-                              spreadRadius: 2.0
-                          )
-                        ]
-                    ),
-                    child: TextButton(
-                      onPressed: (){
-                        setState(() {
-                          isChecked.forEach((key, value) {
-                            isChecked[key] = false;
-                          });
-                          isChecked[index] = true;
-                        });
-                        apiCallForCategory(categoryName: uniqueCategory[index]);
-                      },
-                      child: Text(
-                          uniqueCategory[index],
-                          style:const TextStyle(
-                              color: Colors.blueGrey,
-                              fontSize: 12
-                          )
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        /// Section Name
+        Container(
+          margin: const EdgeInsets.only(
+            top: 15, left: 10,),
+          child:const Text("Categories",
+              style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black)),
+        ),
+        /// Categories Section
+        SizedBox(
+          height: 70,
+          child: isLoadingCategory ? showLoading() : ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: uniqueCategory.length,
+            itemBuilder: (context,index){
+              return Container(
+                height: 30,
+                constraints: const BoxConstraints(
+                  minWidth: 120,
+                ),
+                //width : 150,
+                padding:const EdgeInsets.all(2),
+                margin : const EdgeInsets.all(10),
+                child: Container(
+                  height : 60,
+                  decoration:  BoxDecoration(
+                      color: Colors.white,
+                      borderRadius:const BorderRadius.all(
+                        Radius.circular(30.0),
                       ),
+                      boxShadow: [
+                        isChecked[index] == true? const BoxShadow(
+                            color: Colors.deepOrange,
+                            offset: Offset(1.0, 2.0),
+                            blurRadius: 8.0,
+                            spreadRadius: 2.0
+                        ):
+                        const BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(1.0, 2.0),
+                            blurRadius: 8.0,
+                            spreadRadius: 2.0
+                        )
+                      ]
+                  ),
+                  child: TextButton(
+                    onPressed: (){
+                      setState(() {
+                        isChecked.forEach((key, value) {
+                          isChecked[key] = false;
+                        });
+                        isChecked[index] = true;
+                      });
+                      apiCallForCategory(categoryName: uniqueCategory[index]);
+                    },
+                    child: Text(
+                        uniqueCategory[index],
+                        style:const TextStyle(
+                            color: Colors.blueGrey,
+                            fontSize: 12
+                        )
                     ),
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
-          /// Section Name
-          Container(
-            margin: const EdgeInsets.only(
+        ),
+        /// Section Name
+        Container(
+          margin: const EdgeInsets.only(
               top: 15,
               left: 10
-            ),
-            child:const Text("Products",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black)),
           ),
-          /// products
-          Expanded(
+          child:const Text("Products",
+              style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black)),
+        ),
+        /// products
+        Expanded(
             child: isLoadingProducts ? showLoading() :
             GridView.count(
               crossAxisCount: 3,
               children: List.generate(
                   listResponse.length,(index) {
-                    return Center(
-                        child: productCard(
-                            productID: listResponse[index]['id'],
-                            title: listResponse[index]['title'],
-                            description: listResponse[index]['description'],
-                            productImage: listResponse[index]['image'],
-                            productPrice:listResponse[index]['price'] ,
-                            rating: listResponse[index]['rating']['rate'],
-                            ratingCount: listResponse[index]['rating']['count'],
-                            width: width,
-                            conteXt: context,
-                            textSize: unitHeightValue*multiplier-5,
-                        )
-                    );
-                  }
+                return Center(
+                    child: productCard(
+                      productID: listResponse[index]['id'],
+                      title: listResponse[index]['title'],
+                      description: listResponse[index]['description'],
+                      productImage: listResponse[index]['image'],
+                      productPrice:listResponse[index]['price'] ,
+                      rating: listResponse[index]['rating']['rate'],
+                      ratingCount: listResponse[index]['rating']['count'],
+                      width: width,
+                      conteXt: context,
+                      textSize: unitHeightValue*multiplier-5,
+                    )
+                );
+              }
               ),
             )
-          )
-        ],
-      )
+        )
+      ],
     );
+
   }
 }
